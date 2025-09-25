@@ -1,19 +1,16 @@
-"use server";
-
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-// If you have Supabase types (via `supabase gen types`), import them here.
-// For now, just keep it generic with `unknown`.
+// Keep generic types for now
 type Db = unknown;
 
-// 1) Browser client (safe with NEXT_PUBLIC_* vars)
+// Browser client (uses NEXT_PUBLIC_* envs)
 export const createBrowserClient = () => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
   return createClient<Db>(url, anon);
 };
 
-// 2) Server client (for RSC / server actions)
+// Server client
 export const createServerClient = () => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -22,7 +19,7 @@ export const createServerClient = () => {
   });
 };
 
-// 3) Admin client (service role — server only!)
+// Admin client (service role — server only)
 let _admin: SupabaseClient<Db> | null = null;
 
 export const createAdminClient = () => {
