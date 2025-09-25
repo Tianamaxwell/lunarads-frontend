@@ -1,27 +1,32 @@
-import "./globals.css";
+import "@/app/globals.css";
 import type { Metadata } from "next";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "LunarAds",
-  description: "Frontend skeleton — Next.js + Tailwind + Supabase",
+  description: "Clean frontend",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen antialiased">
-        <header className="border-b border-white/10">
-          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-            <h1 className="text-lg font-semibold tracking-tight">LunarAds</h1>
-            <nav className="text-sm opacity-80">Week 3 — Frontend</nav>
-          </div>
-        </header>
-        <main className="mx-auto max-w-5xl px-4 py-12">{children}</main>
-        <footer className="mt-20 border-t border-white/10">
-          <div className="mx-auto max-w-5xl px-4 py-8 text-sm opacity-60">
-            © {new Date().getFullYear()} LunarAds
-          </div>
-        </footer>
+      <body className="min-h-screen">
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1">
+            <header className="border-b border-[var(--line)]">
+              <div className="mx-auto max-w-6xl px-6 py-4 text-sm text-[var(--muted)]">
+                Week 3 — Frontend
+              </div>
+            </header>
+            <div className="mx-auto max-w-6xl px-6 py-10">{children}</div>
+            <footer className="border-t border-[var(--line)]">
+              <div className="mx-auto max-w-6xl px-6 py-8 text-xs text-[var(--muted)]">
+                © {new Date().getFullYear()} LunarAds
+              </div>
+            </footer>
+          </main>
+        </div>
       </body>
     </html>
   );
