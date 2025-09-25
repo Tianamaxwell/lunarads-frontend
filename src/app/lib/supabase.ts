@@ -1,18 +1,19 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-type Db = any; // replace later with types
+// If you have Supabase types (via `supabase gen types`), import them here.
+// For now, just keep it generic with `unknown`.
+type Db = unknown;
 
-// Browser client
+// 1) Browser client (safe with NEXT_PUBLIC_* vars)
 export const createBrowserClient = () => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
   return createClient<Db>(url, anon);
 };
 
-// Server client
+// 2) Server client (for RSC / server actions)
 export const createServerClient = () => {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -21,7 +22,7 @@ export const createServerClient = () => {
   });
 };
 
-// Admin client (server only!)
+// 3) Admin client (service role — server only!)
 let _admin: SupabaseClient<Db> | null = null;
 
 export const createAdminClient = () => {
