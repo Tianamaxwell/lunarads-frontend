@@ -1,33 +1,22 @@
+// src/lib/supabase.ts
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+type Db = any; // permissive for now
 
-// Keep generic types for now
-type Db = unknown;
+export const createBrowserClient = () =>
+  createClient<Db>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
-// Browser client (uses NEXT_PUBLIC_* envs)
-export const createBrowserClient = () => {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-  return createClient<Db>(url, anon);
-};
-
-// Server client
-export const createServerClient = () => {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-  return createClient<Db>(url, anon, {
+export const createServerClient = () =>
+  createClient<Db>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     auth: { persistSession: false, detectSessionInUrl: false },
   });
-};
 
-// Admin client (service role — server only)
 let _admin: SupabaseClient<Db> | null = null;
-
 export const createAdminClient = () => {
   if (_admin) return _admin;
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-  _admin = createClient<Db>(url, serviceRole, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  _admin = createClient<Db>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } }
+  );
   return _admin;
 };

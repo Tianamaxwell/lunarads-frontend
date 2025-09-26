@@ -1,42 +1,35 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* minimalist theme */
-:root {
-  --bg: #0b0c0f;      /* near-black */
-  --card: #111317;    /* soft panels */
-  --fg: #e9eaee;      /* off-white text */
-  --muted: #a3a7b3;   /* secondary */
-  --line: #22252b;    /* hairline borders */
-  --brand: #60a5fa;   /* calm blue */
+/* SnowUI — light/dark tokens */
+:root{
+  --su-bg: #f8fafc;         /* slate-50 */
+  --su-card: #ffffff;       /* white */
+  --su-fg: #0f172a;         /* slate-900 */
+  --su-muted: #64748b;      /* slate-500 */
+  --su-line: #e2e8f0;       /* slate-200 */
+  --su-brand: #2563eb;      /* blue-600 */
+  --su-brand-700:#1d4ed8;   /* blue-700 */
+  --su-success:#16a34a;     /* green-600 */
+  --su-warn:#ea580c;        /* orange-600 */
+  --su-danger:#dc2626;      /* red-600 */
+  --su-radius: 14px;
+  --su-shadow: 0 6px 24px rgba(2,6,23,.06);
 }
-html,body { height: 100%; }
-body { background: var(--bg); color: var(--fg); }
-.hr { border-color: var(--line); }
+
+:root.dark{
+  --su-bg:#0b1220;          /* deep slate */
+  --su-card:#0f172a;        /* slate-900 */
+  --su-fg:#e5e7eb;          /* slate-200 */
+  --su-muted:#94a3b8;       /* slate-400 */
+  --su-line:#1f2937;        /* slate-800 */
+  --su-brand:#3b82f6;       /* blue-500 */
+  --su-brand-700:#2563eb;   /* blue-600 */
+  --su-success:#22c55e;
+  --su-warn:#fb923c;
+  --su-danger:#ef4444;
+}
+
+html,body{height:100%}
+body{background:var(--su-bg); color:var(--su-fg)}

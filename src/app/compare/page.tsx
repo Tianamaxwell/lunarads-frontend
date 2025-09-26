@@ -1,27 +1,36 @@
-export default function ComparePage() {
+import Container from "@/components/snowui/Container";
+import { Card, CardBody, CardHeader } from "@/components/snowui/Card";
+import Badge from "@/components/snowui/Badge";
+
+export default function ComparePage(){
   return (
-    <section className="grid gap-8 md:grid-cols-[2fr,1fr]">
-      <div className="rounded-2xl border hr border-[var(--line)] p-6">
-        <div className="aspect-video rounded-xl border hr border-[var(--line)]" />
-        <p className="mt-3 text-sm text-[var(--muted)]">Preview</p>
-      </div>
-      <div className="rounded-2xl border hr border-[var(--line)] p-6 text-center">
-        <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-white/10">
-          <span className="text-3xl font-bold">88</span>
-        </div>
-        <div className="text-sm text-[var(--muted)]">Lunar Score</div>
+    <Container>
+      <h1 className="mb-6 text-2xl font-semibold">Compare</h1>
+      <div className="grid gap-6 md:grid-cols-[2fr,1fr]">
+        <Card><CardHeader title="Preview" /><CardBody>
+          <div className="aspect-video rounded-[12px] border border-[var(--su-line)]" />
+        </CardBody></Card>
+        <Card><CardHeader title="Lunar Score" /><CardBody>
+          <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-blue-600/10">
+            <span className="text-3xl font-bold text-blue-700">88</span>
+          </div>
+          <p className="mt-3 text-sm text-[var(--su-muted)] text-center">Top 15% in hook strength</p>
+        </CardBody></Card>
       </div>
 
-      <div className="md:col-span-2 rounded-2xl border hr border-[var(--line)] p-6">
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-          {["Ad type: Demo","Tags: Lifestyle","Appeal: Pathos","Industry: Beauty"].map((t)=>(
-            <div key={t} className="rounded-xl border hr border-[var(--line)] p-4 text-sm">{t}</div>
+      <Card className="mt-6"><CardHeader title="Attributes" /><CardBody>
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+          {["Ad type: Demo","Tags: Lifestyle","Appeal: Pathos","Industry: E-commerce"].map(t=>(
+            <div key={t} className="rounded-[12px] border border-[var(--su-line)] p-4 text-sm">{t}</div>
           ))}
         </div>
-        <div className="mt-6 rounded-xl border hr border-[var(--line)] p-4 text-sm text-[var(--muted)]">
-          Strong hook in first 3s. Try a more explicit CTA in the last third.
+        <div className="mt-6 rounded-[12px] border border-[var(--su-line)] p-4 text-sm text-[var(--su-muted)]">
+          Strong hook in first 3s. Try a clearer CTA in the last third.
         </div>
-      </div>
-    </section>
+        <div className="mt-4 flex gap-2">
+          <Badge>Hook +12%</Badge><Badge>Pacing +7%</Badge><Badge>Captions +4%</Badge>
+        </div>
+      </CardBody></Card>
+    </Container>
   );
 }
